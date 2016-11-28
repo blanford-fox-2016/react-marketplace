@@ -37,6 +37,7 @@ class AppTextInput extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
+        let id = Date.now().toString()
         let name = this.state.name.trim()
         let price = this.state.price.trim()
         let description = this.state.description.trim()
@@ -44,7 +45,7 @@ class AppTextInput extends Component {
         if (!name || !price || !description || !image) {
             return
         }
-        this.props.onSave(name, phone)
+        this.props.onSave(id, name, price, description, image)
         this.setState({
             name: '',
             price: '',
@@ -65,26 +66,26 @@ class AppTextInput extends Component {
                 <div className="form-group">
                     <label className="control-label col-sm-2">Price:</label>
                     <div className="col-sm-10">
-                        <input type="number" placeholder="Price" className="form-control" value={this.state.phone} onChange={this.handlePriceChange.bind(this)} />
+                        <input type="number" placeholder="Price" className="form-control" value={this.state.price} onChange={this.handlePriceChange.bind(this)} />
                     </div>
                 </div>
                 <div className="form-group">
                     <label className="control-label col-sm-2">Description:</label>
                     <div className="col-sm-10">
-                        <textarea className="form-control" rows="10" onChange={this.handleDescriptionChange.bind(this)}>
-                            {this.state.description}
+                        <textarea className="form-control" rows="10" value={this.state.description} onChange={this.handleDescriptionChange.bind(this)}>
+
                         </textarea>
-                    </div>
-                </div>
-                <div className="form-group">
-                    <div className="col-sm-offset-2 col-sm-10">
-                        <button type="submit" className="btn btn-success">Save</button>
                     </div>
                 </div>
                 <div className="form-group">
                     <label className="control-label col-sm-2">Image:</label>
                     <div className="col-sm-10">
                         <input type="text" placeholder="Image" className="form-control" value={this.state.image} onChange={this.handleImageChange.bind(this)} />
+                    </div>
+                </div>
+                <div className="form-group">
+                    <div className="col-sm-offset-2 col-sm-10">
+                        <button type="submit" className="btn btn-success">Save</button>
                     </div>
                 </div>
             </form>
@@ -94,9 +95,9 @@ class AppTextInput extends Component {
 
 AppTextInput.propTypes = {
     name: PropTypes.string,
-    price: PropTypes.price,
-    description: PropTypes.description,
-    image: PropTypes.image,
+    price: PropTypes.number,
+    description: PropTypes.string,
+    image: PropTypes.string,
     onSave: PropTypes.func.isRequired
 }
 

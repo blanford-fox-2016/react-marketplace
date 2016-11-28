@@ -5,8 +5,8 @@ import {
     LOAD_PHONEBOOKS_SUCCESS,
     LOAD_PHONEBOOKS_FAILURE,
     LOAD_DATA,
-    ADD_PHONEBOOK_SUCCES,
-    ADD_PHONEBOOK_FAILURE,
+    ADD_PHONEBOOKS_SUCCESS,
+    ADD_PHONEBOOKS_FAILURE,
 } from '../constants/ActionTypes'
 
 const initialState = []
@@ -22,33 +22,43 @@ export default function data(state = initialState, action) {
 
         case ADD_DATA:
             return [
+                ...state,
                 {
                     id: action.id,
-                    name: action.name,
-                    phone: action.phone
+                    name: 'temp',
+                    price: action.price,
+                    description: action.description,
+                    image: action.image,
+                    fake: true
                 },
-                ...state
             ]
 
-        case ADD_PHONEBOOK_SUCCES:
-            let idObject = state.map(function (x) {
+        case ADD_PHONEBOOKS_SUCCESS:
+            // console.log("ini state: ", state)
+            // console.log("ini action: ", action)
+
+            let idObjects = state.map(function (x) {
+                // console.log("ini x: ", x)
                 return x.id
-            }).indexOf(action.phonebook.id)
+            })
+
+            // console.log("ini id objects: ", idObjects)
+            let idObject = idObjects.indexOf(action.phonebook.id)
+
+            // console.log("ini id object: ", idObject)
             if (idObject > -1) {
-                return state
+                let newData = state.filter((data) => {
+                    return data.fake != true
+                })
+                return [...newData, action.phonebook]
             }
             else {
-                return [action.phonebook, ...state]
+
+                return [...state, action.phonebook]
             }
 
-        case DELETE_DATA:
-            return state.filter(data => data.id !== action.id)
-
-        case EDIT_DATA:
-            return state.map(data => data.id === action.id ? Object.assign({}, data, {name: action.name, phone: action.phone}) : data)
-
         case LOAD_PHONEBOOKS_FAILURE:
-        case ADD_PHONEBOOK_FAILURE:
+        case ADD_PHONEBOOKS_FAILURE:
             return state
 
         // case SEARCH_DATA:

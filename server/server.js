@@ -29,7 +29,9 @@ app.post('/api/phonebooks', function (req, res) {
         var phonebook = {
             id: req.body.id,
             name: req.body.name,
-            phone: req.body.phone
+            price: req.body.price,
+            description: req.body.description,
+            image: req.body.image
         }
         phonebooks.push(phonebook)
         fs.writeFile(PHONEBOOKS_FILE, JSON.stringify(phonebooks, null, 3), function (err) {

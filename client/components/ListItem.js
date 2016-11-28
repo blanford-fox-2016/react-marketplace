@@ -2,48 +2,11 @@ import React, {Component, PropTypes} from 'react'
 import DataItem from './DataItem'
 
 export default class ListItem extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            searchName: '',
-            searchPhone: ''
-        }
-    }
-
-    getSearchName(e) {
-        this.setState({
-            searchName: e.target.value
-        })
-
-    }
-
-    getSearchPhone(e) {
-        this.setState({
-            searchPhone: e.target.value
-        })
-
-    }
 
     render() {
 
         const {data, actions} = this.props
         let dataFilter = data
-
-        if (this.state.searchName) {
-            dataFilter = data.filter((data) => {
-                return data.name.toLowerCase().startsWith(this.state.searchName.toLowerCase())
-            })
-        }
-        if (this.state.searchPhone) {
-            dataFilter = data.filter((data) => {
-                return data.phone.startsWith(this.state.searchPhone)
-            })
-        }
-        if (this.state.searchName != '' && this.state.searchPhone != '') {
-            dataFilter = data.filter((data) => {
-                return (data.name.toLowerCase().startsWith(this.state.searchName.toLowerCase())) && (data.phone.startsWith(this.state.searchPhone))
-            })
-        }
         let dataNodes = dataFilter.map(function (item) {
             return(
                 <DataItem key={item.id} data={item} {...actions} />
@@ -53,9 +16,7 @@ export default class ListItem extends Component {
 
         return(
             <div>
-                <div>
-
-                </div>
+                {dataNodes}
             </div>
         )
 
