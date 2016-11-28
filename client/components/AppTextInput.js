@@ -5,7 +5,8 @@ class AppTextInput extends Component {
         super(props)
         this.state = {
             name: this.props.name || '',
-            phone: this.props.phone || ''
+            price: this.props.price || '',
+            description: this.props.description || ''
         }
     }
 
@@ -15,9 +16,15 @@ class AppTextInput extends Component {
         })
     }
 
-    handlePhoneChange(e) {
+    handlePriceChange(e) {
         this.setState({
-            phone: e.target.value
+            price: e.target.value
+        })
+    }
+
+    handleDescriptionChange(e) {
+        this.setState({
+            description: e.target.value
         })
     }
 
@@ -31,20 +38,39 @@ class AppTextInput extends Component {
         this.props.onSave(name, phone)
         this.setState({
             name: '',
-            phone: ''
+            price: '',
+            description: ''
         })
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit.bind(this)} className="form-inline">
+            <form onSubmit={this.handleSubmit.bind(this)} className="form-horizontal">
                 <div className="form-group">
-                    <input type="text" placeholder="Name" className="form-control" value={this.state.name} onChange={this.handleNameChange.bind(this)} />
+                    <label className="control-label col-sm-2">Name:</label>
+                    <div className="col-sm-10">
+                        <input type="text" placeholder="Name" className="form-control" value={this.state.name} onChange={this.handleNameChange.bind(this)} />
+                    </div>
                 </div>
                 <div className="form-group">
-                    <input type="text" placeholder="Phone" className="form-control" value={this.state.phone} onChange={this.handlePhoneChange.bind(this)} />
+                    <label className="control-label col-sm-2">Price:</label>
+                    <div className="col-sm-10">
+                        <input type="number" placeholder="Price" className="form-control" value={this.state.phone} onChange={this.handlePriceChange.bind(this)} />
+                    </div>
                 </div>
-                <button type="submit">Save</button>
+                <div className="form-group">
+                    <label className="control-label col-sm-2">Description:</label>
+                    <div className="col-sm-10">
+                        <textarea className="form-control" rows="10" onChange={this.handleDescriptionChange.bind(this)}>
+                            {this.state.description}
+                        </textarea>
+                    </div>
+                </div>
+                <div className="form-group">
+                    <div className="col-sm-offset-2 col-sm-10">
+                        <button type="submit" className="btn btn-success">Save</button>
+                    </div>
+                </div>
             </form>
         )
     }

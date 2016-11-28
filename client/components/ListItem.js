@@ -52,10 +52,6 @@ export default class ListItem extends Component {
         })
         return(
             <div>
-                <form className="form-inline">
-                    <input type="text" placeholder="Search Name" className="form-control" value={this.state.searchName} onChange={this.getSearchName.bind(this)} />
-                    <input type="text" placeholder="Search Phone" className="form-control" value={this.state.searchPhone} onChange={this.getSearchPhone.bind(this)} />
-                </form>
                 <table className="table table-bordered">
                     <thead>
                     <tr>
