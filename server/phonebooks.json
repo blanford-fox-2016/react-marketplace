@@ -33,5 +33,12 @@
       "price": "50000",
       "description": "lellelele",
       "image": "https://cdn.pixabay.com/photo/2016/08/07/15/02/blueberries-1576407__480.jpg"
+   },
+   {
+      "id": "1480330669820",
+      "name": "name f",
+      "price": "60000",
+      "description": "flflfllfllflfl",
+      "image": "https://cdn.pixabay.com/photo/2016/10/31/18/25/yogurt-1786329__480.jpg"
    }
 ]

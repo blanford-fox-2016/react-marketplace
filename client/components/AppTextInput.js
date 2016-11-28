@@ -37,7 +37,7 @@ class AppTextInput extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        let id = Date.now().toString()
+        let dataId = Date.now().toString()
         let name = this.state.name.trim()
         let price = this.state.price.trim()
         let description = this.state.description.trim()
@@ -45,7 +45,7 @@ class AppTextInput extends Component {
         if (!name || !price || !description || !image) {
             return
         }
-        this.props.onSave(id, name, price, description, image)
+        this.props.onSave(dataId, name, price, description, image)
         this.setState({
             name: '',
             price: '',

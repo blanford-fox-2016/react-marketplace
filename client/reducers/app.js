@@ -24,7 +24,7 @@ export default function data(state = initialState, action) {
             return [
                 ...state,
                 {
-                    id: action.id,
+                    dataId: action.dataId,
                     name: 'temp',
                     price: action.price,
                     description: action.description,

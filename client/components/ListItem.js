@@ -1,22 +1,24 @@
 import React, {Component, PropTypes} from 'react'
 import DataItem from './DataItem'
+import PageNumber from './PageNumber'
 
 export default class ListItem extends Component {
 
     render() {
 
-        const {data, actions} = this.props
+        const {data, pageNumber, actions} = this.props
         let dataFilter = data
         let dataNodes = dataFilter.map(function (item) {
             return(
-                <DataItem key={item.id} data={item} {...actions} />
+                <DataItem key={item.dataId} data={item} {...actions} />
             //    deleteData={actions.deleteData} 3 kali
             )
         })
 
         return(
             <div>
-                {dataNodes}
+                <div>{dataNodes}</div>
+                <div className="text-center"><PageNumber pageNumber={dataNodes.length}/></div>
             </div>
         )
 

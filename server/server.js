@@ -7,39 +7,38 @@ var app = express()
 
 var PHONEBOOKS_FILE = path.join(__dirname, 'phonebooks.json')
 
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/react-marketplace')
+
+const Data = require('./model')
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/api/phonebooks', function (req, res) {
-    fs.readFile(PHONEBOOKS_FILE, function (err, data) {
-        if (err) {
-            console.error(err)
-        }
-        res.json(JSON.parse(data))
+    let perPage = 5
+    let page = req.param('page') > 0 ? req.param('page') : 0
+    Data.find({}, {}, { skip: perPage * page, limit: perPage }, function (err, data) {
+        console.log(data)
+        if (err) res.json(err)
+        else res.json(data)
     })
 })
 
 app.post('/api/phonebooks', function (req, res) {
-    fs.readFile(PHONEBOOKS_FILE, function (err, data) {
-        if (err) {
-            console.error(err)
-        }
-        var phonebooks = JSON.parse(data)
-        var phonebook = {
-            id: req.body.id,
-            name: req.body.name,
-            price: req.body.price,
-            description: req.body.description,
-            image: req.body.image
-        }
-        phonebooks.push(phonebook)
-        fs.writeFile(PHONEBOOKS_FILE, JSON.stringify(phonebooks, null, 3), function (err) {
-            if (err) {
-                console.error(err)
-            }
-            res.json(phonebook)
-        })
+    console.log(req.body)
+    let data = {
+        dataId: req.body.dataId,
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        image: req.body.image
+    }
+
+    Data.create(data, (err, data) => {
+        if (err) res.json(err)
+        else res.json(data)
     })
 })
 

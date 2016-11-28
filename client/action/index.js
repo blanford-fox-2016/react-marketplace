@@ -3,8 +3,8 @@ import request from 'superagent'
 
 const SERVER_URL = 'http://localhost:8000/api/phonebooks'
 
-export function addData(id, name, price, description, image) {
-    return {type: types.ADD_DATA, id, name, price, description, image}
+export function addData(dataId, name, price, description, image) {
+    return {type: types.ADD_DATA, dataId, name, price, description, image}
 }
 
 
@@ -32,7 +32,6 @@ export function loadPhoneBooks() {
                     dispatch(loadPhoneBooksFailure())
                 }
                 else {
-                    console.log("ini body: ", res.body)
                     dispatch(loadPhoneBooksSuccess(res.body))
                 }
             })
@@ -48,14 +47,15 @@ export function addPhoneBookSuccess(phonebook) {
     return {type: types.ADD_PHONEBOOKS_SUCCESS, phonebook}
 }
 
-export function addPhoneBook(id, name, price, description, image) {
+export function addPhoneBook(dataId, name, price, description, image) {
+    console.log(dataId, name, price, description, image)
     return dispatch => {
-        dispatch(addData(id, name, price, description, image))
+        dispatch(addData(dataId, name, price, description, image))
         return request
             .post(SERVER_URL)
             .type('form')
             .send({
-                id: id,
+                dataId: dataId,
                 name: name,
                 price: price,
                 description: description,
