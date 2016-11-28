@@ -50,23 +50,32 @@ export default class ListItem extends Component {
             //    deleteData={actions.deleteData} 3 kali
             )
         })
+
         return(
             <div>
-                <table className="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
+                <div>
 
-                    <tbody>
-                    {dataNodes}
-                    </tbody>
-                </table>
+                </div>
             </div>
         )
+
+        // return(
+        //     <div>
+        //         <table className="table table-bordered">
+        //             <thead>
+        //             <tr>
+        //                 <th>Name</th>
+        //                 <th>Phone</th>
+        //                 <th>Action</th>
+        //             </tr>
+        //             </thead>
+        //
+        //             <tbody>
+        //             {dataNodes}
+        //             </tbody>
+        //         </table>
+        //     </div>
+        // )
     }
 }
 

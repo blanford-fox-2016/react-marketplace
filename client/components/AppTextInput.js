@@ -6,7 +6,8 @@ class AppTextInput extends Component {
         this.state = {
             name: this.props.name || '',
             price: this.props.price || '',
-            description: this.props.description || ''
+            description: this.props.description || '',
+            image: this.props.image || ''
         }
     }
 
@@ -28,18 +29,27 @@ class AppTextInput extends Component {
         })
     }
 
+    handleImageChange(e) {
+        this.setState({
+            image: e.target.value
+        })
+    }
+
     handleSubmit(e) {
         e.preventDefault()
         let name = this.state.name.trim()
-        let phone = this.state.phone.trim()
-        if (!name || !phone) {
+        let price = this.state.price.trim()
+        let description = this.state.description.trim()
+        let image = this.state.image.trim()
+        if (!name || !price || !description || !image) {
             return
         }
         this.props.onSave(name, phone)
         this.setState({
             name: '',
             price: '',
-            description: ''
+            description: '',
+            image: ''
         })
     }
 
@@ -71,6 +81,12 @@ class AppTextInput extends Component {
                         <button type="submit" className="btn btn-success">Save</button>
                     </div>
                 </div>
+                <div className="form-group">
+                    <label className="control-label col-sm-2">Image:</label>
+                    <div className="col-sm-10">
+                        <input type="text" placeholder="Image" className="form-control" value={this.state.image} onChange={this.handleImageChange.bind(this)} />
+                    </div>
+                </div>
             </form>
         )
     }
@@ -78,7 +94,9 @@ class AppTextInput extends Component {
 
 AppTextInput.propTypes = {
     name: PropTypes.string,
-    phone: PropTypes.string,
+    price: PropTypes.price,
+    description: PropTypes.description,
+    image: PropTypes.image,
     onSave: PropTypes.func.isRequired
 }
 
