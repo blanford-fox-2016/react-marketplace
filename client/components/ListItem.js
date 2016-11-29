@@ -26,24 +26,6 @@ export default class ListItem extends Component {
                 <div>{dataNodes}</div>
             </div>
         )
-
-        // return(
-        //     <div>
-        //         <table className="table table-bordered">
-        //             <thead>
-        //             <tr>
-        //                 <th>Name</th>
-        //                 <th>Phone</th>
-        //                 <th>Action</th>
-        //             </tr>
-        //             </thead>
-        //
-        //             <tbody>
-        //             {dataNodes}
-        //             </tbody>
-        //         </table>
-        //     </div>
-        // )
     }
 }
 

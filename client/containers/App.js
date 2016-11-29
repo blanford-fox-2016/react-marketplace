@@ -10,7 +10,9 @@ export default class App extends Component {
         return(
             <div className="container">
                 <DisplayItem />
-                <PageNumber />
+                <div className="text-center">
+                    <PageNumber />
+                </div>
             </div>
         )
     }
