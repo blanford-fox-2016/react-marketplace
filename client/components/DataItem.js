@@ -2,6 +2,26 @@ import React, {Component, PropTypes} from 'react'
 
 class DataItem extends Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            showClass: this.props.name || 'panel-body hide'
+        }
+    }
+
+    showDetail() {
+        this.setState({
+            showClass: 'panel-body'
+        })
+    }
+
+    hideDetail() {
+        console.log(this.state.showClass)
+        this.setState({
+            showClass: 'panel-body hide'
+        })
+    }
+
     render() {
         const {data} = this.props
         return (
@@ -12,10 +32,10 @@ class DataItem extends Component {
                     </div>
                     <div className="col-sm-10">
                         <div className="panel panel-success">
-                            <div className="panel-heading">
+                            <div onMouseEnter={this.showDetail.bind(this)} onMouseLeave={this.hideDetail.bind(this)} className="panel-heading">
                                 {data.name}
                             </div>
-                            <div className="panel-body">
+                            <div className={this.state.showClass}>
                                 <p>{data.price}</p>
                                 <p>{data.description}</p>
                             </div>
