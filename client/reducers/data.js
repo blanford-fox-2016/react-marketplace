@@ -18,7 +18,8 @@ export default function data(state = initialState, action) {
             return []
 
         case LOAD_PHONEBOOKS_SUCCESS:
-            return action.phonebooks
+            console.log("ini load data di reducers: ", action.response.data)
+            return action.response.data
 
         case ADD_DATA:
             return [

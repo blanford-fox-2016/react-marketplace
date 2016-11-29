@@ -6,7 +6,8 @@ export default class ListItem extends Component {
 
     render() {
 
-        const {data, pageNumber, actions} = this.props
+        const {data, actions} = this.props
+
         let dataFilter = data
         let dataNodes = dataFilter.map(function (item) {
             return(
@@ -15,10 +16,14 @@ export default class ListItem extends Component {
             )
         })
 
+
+        var buttons = [
+
+        ]
+
         return(
             <div>
                 <div>{dataNodes}</div>
-                <div className="text-center"><PageNumber pageNumber={dataNodes.length}/></div>
             </div>
         )
 

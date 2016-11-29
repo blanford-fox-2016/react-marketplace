@@ -16,18 +16,38 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-app.get('/api/phonebooks', function (req, res) {
+app.get('/api/phonebooks/', function (req, res) {
     let perPage = 5
-    let page = req.param('page') > 0 ? req.param('page') : 0
-    Data.find({}, {}, { skip: perPage * page, limit: perPage }, function (err, data) {
+    let page = req.query.page || 1
+    console.log(page)
+    Data.find({}, {}, { skip: perPage * (page - 1), limit: perPage }, function (err, data) {
         console.log(data)
         if (err) res.json(err)
-        else res.json(data)
+        else {
+            let dataTemp = data
+            Data.count(function (err, count) {
+                var array = []
+                console.log(Math.ceil(count/perPage))
+                for (var i = 1; i <= Math.ceil(count/perPage); i++) {
+                    if (i == page) {
+                        array.push({active: true, label: i})
+                    }
+                    else {
+                        array.push({active: false, label: i})
+                    }
+                }
+
+                res.json({
+                    data: dataTemp,
+                    pagination: array
+                })
+            })
+        }
     })
 })
 
 app.post('/api/phonebooks', function (req, res) {
-    console.log(req.body)
+    // console.log(req.body)
     let data = {
         dataId: req.body.dataId,
         name: req.body.name,

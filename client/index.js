@@ -9,7 +9,7 @@ const store = configureStore()
 
 render(
     <Provider store={store}>
-        <App data="" actions=""/>
+        <App />
     </Provider>,
     document.getElementById('root')
 )

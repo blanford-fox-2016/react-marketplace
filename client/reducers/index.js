@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
-import data from './app'
+import data from './data'
+import pagination from './paginations'
 
 const rootReducer = combineReducers({
-    data
+    data, pagination
+
 })
 
 export default rootReducer

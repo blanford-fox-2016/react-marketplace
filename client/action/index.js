@@ -12,19 +12,19 @@ export function loadData() {
     return {type: types.LOAD_DATA}
 }
 
-export function loadPhoneBooksSuccess(phonebooks) {
-    return {type: types.LOAD_PHONEBOOKS_SUCCESS, phonebooks}
+export function loadPhoneBooksSuccess(response) {
+    return {type: types.LOAD_PHONEBOOKS_SUCCESS, response}
 }
 
 export function loadPhoneBooksFailure() {
     return {type: types.LOAD_PHONEBOOKS_FAILURE}
 }
 
-export function loadPhoneBooks() {
+export function selectPage(page) {
     return dispatch => {
         dispatch(loadData())
         return request
-            .get(SERVER_URL)
+            .get(`${SERVER_URL}/?page=${page}`)
             .set('Accept', 'application/json')
             .end((err, res) => {
                 if (err) {
@@ -32,6 +32,7 @@ export function loadPhoneBooks() {
                     dispatch(loadPhoneBooksFailure())
                 }
                 else {
+                    console.log("in ires body: ", res.body)
                     dispatch(loadPhoneBooksSuccess(res.body))
                 }
             })

@@ -1,19 +1,49 @@
 import React, {Component, PropTypes} from 'react'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import {selectPage} from '../action'
 
 class PageNumber extends Component {
+
+    componentDidMount() {
+        this.props.selectPage(1)
+    }
+
     render() {
-        const {pageNumber} = this.props
-        console.log("ini page number")
+
+        var paginations = this.props.pagination.map((page) => {
+        //    page = {active: true, label: 1}
+            return(
+                <button
+                    className={page.active ? "btn btn-default active" : "btn btn-default"}
+                    onClick={() => this.props.selectPage(page.label)} key={page.label}
+                >
+                    {page.label}
+                    </button>
+            )
+        })
+
         return (
             <div className="row">
                 <div className="col-sm-12">
-                    <button className="btn btn-default">1</button>
-                    <button className="btn btn-default">2</button>
-                    <button className="btn btn-default">3</button>
+                    {paginations}
                 </div>
             </div>
         )
     }
 }
 
-export default PageNumber
+
+function mapStateToProps(state) {
+    return{
+        pagination: state.pagination
+    }
+}
+
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
+        selectPage: selectPage
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(PageNumber)
