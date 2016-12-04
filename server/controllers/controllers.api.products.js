@@ -1,17 +1,16 @@
 import Product from '../models/models.api.products'
 
 let getAllProducts = (req, res) => {
-  Product.find({}, {}, {
-    // skip: 1, // mulai dari index berapa
-    // limit: 1 // mau nampilin berapa
-  },
-  (err, all_data) => {
+  Product.find((err, all_data) => {
     if(err){
       console.log(err);
     }else{
       res.json(all_data)
     }
   })
+    .sort({_id: -1})
+    .skip(1)
+    .limit(1)
 }
 
 let addNewProduct = (req, res) => {
