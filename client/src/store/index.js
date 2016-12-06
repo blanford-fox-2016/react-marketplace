@@ -3,7 +3,7 @@ import rootReducer from '../reducers'
 import ReduxLogger from 'redux-logger'
 import ReduxThunk from 'redux-thunk'
 
-export default configureStore = () => {
+export default () => {
   const logger = ReduxLogger()
 
   const enhancer = compose( applyMiddleware(ReduxThunk, logger) )

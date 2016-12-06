@@ -8,18 +8,16 @@ import {  LOAD_PRODUCTS,
 
 const initialState = []
 
-export default data = (state = initialState, action){
+export default (state = initialState, action) => {
   switch (action.type) {
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     // add products
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     case LOAD_PRODUCTS:
       return state;
-      break;
 
     case LOAD_PRODUCTS_SUCCESS:
       return action.products;
-      break;
 
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     // add product
@@ -34,24 +32,21 @@ export default data = (state = initialState, action){
         status      : "temp"
       },
       ...state]
-      break;
 
     case ADD_PRODUCT_SUCCESS:
       let index = state.map(product => { return product.productId }).indexOf(action.product.productId)
 
       if(index !== -1){
-        let latest_products = state.filter(product => { return product.status != 'temp'})
+        let latest_products = state.filter(product => { return product.status !== 'temp'})
 
         return [action.product, ...latest_products]
       }else{
         return state
       }
-      break;
 
     case LOAD_PRODUCTS_FAILURE:
     case ADD_PRODUCT_FAILURE:
     default:
       return state;
-      break;
   }
 }
