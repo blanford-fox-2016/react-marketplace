@@ -69,28 +69,48 @@ let addProductSuccess = (product) => {
 let addProduct = (data_product) => {
   let productId = Date.now()
 
-  return dispatch => {
-    dispatch(addStateProduct(productId, data_product))
-    return request
-            .get(PRODUCTS_API_URL)
-            .set('Accept', 'application/json')
-            .type('form')
-            .send({
-              productId : productId,
-              name: data_product.name,
-              price: data_product.price,
-              image_URL: data_product.image_URL,
-              description: data_product.description
-            })
-            .end((err, res) => {
-              if(err){
-                console.error(err)
-                dispatch(addProductFailure())
-              }else{
-                dispatch(addProductSuccess(res.body))
-              }
-            })
-  }
+  addStateProduct(productId, data_product)
+  return request
+          .get(PRODUCTS_API_URL)
+          .set('Accept', 'application/json')
+          .type('form')
+          .send({
+            productId : productId,
+            name: data_product.name,
+            price: data_product.price,
+            image_URL: data_product.image_URL,
+            description: data_product.description
+          })
+          .end((err, res) => {
+            if(err){
+              console.error(err)
+              addProductFailure()
+            }else{
+              addProductSuccess(res.body)
+            }
+          })
+  // return dispatch => {
+  //   dispatch(addStateProduct(productId, data_product))
+  //   return request
+  //           .get(PRODUCTS_API_URL)
+  //           .set('Accept', 'application/json')
+  //           .type('form')
+  //           .send({
+  //             productId : productId,
+  //             name: data_product.name,
+  //             price: data_product.price,
+  //             image_URL: data_product.image_URL,
+  //             description: data_product.description
+  //           })
+  //           .end((err, res) => {
+  //             if(err){
+  //               console.error(err)
+  //               dispatch(addProductFailure())
+  //             }else{
+  //               dispatch(addProductSuccess(res.body))
+  //             }
+  //           })
+  // }
 }
 
 export {

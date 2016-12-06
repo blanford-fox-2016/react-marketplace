@@ -12,6 +12,6 @@ export default () => {
     rootReducer,
     enhancer
   )
-
+  
   return store
 }

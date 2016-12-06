@@ -22,7 +22,8 @@ class App extends Component {
 }
 
 App.propTypes = {
-  actions: PropTypes.object.isRequired
+  reducers_products: PropTypes.array.isRequired,
+  reducers_actions: PropTypes.object.isRequired
 }
 
 let mapStateToProps = (state) => {
@@ -33,7 +34,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    actions : bindActionCreators(AppActions, dispatch)
+    reducers_actions : bindActionCreators(AppActions, dispatch)
   }
 }
 
