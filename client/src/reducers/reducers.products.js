@@ -24,11 +24,11 @@ export default (state = initialState, action) => {
     //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     case ADD_PRODUCT:
       return [{
-        productId   : action.data_product.productId,
-        name        : action.name.productId,
-        price       : action.price.productId,
-        image_URL   : action.image_URL.productId,
-        description : action.description.productId,
+        productId   : action.productId,
+        name        : action.data_product.name,
+        price       : action.data_product.price,
+        image_URL   : action.data_product.image_URL,
+        description : action.data_product.description,
         status      : "temp"
       },
       ...state]

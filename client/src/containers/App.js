@@ -33,8 +33,8 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    actions_products : bindActionCreators(AppActions, dispatch)
+    actions : bindActionCreators(AppActions, dispatch)
   }
 }
 
-export default connect(mapStateToProps)(mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
